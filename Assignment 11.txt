@@ -1,0 +1,204 @@
+1. Write a JavaScript program to take an array as input from the user and calculate the sum of numbers in odd places and the sum of numbers at even places.
+a) Print the difference between the two sums
+b) Print the number of elements in odd places
+c) Print the number of elements in even places
+d) Print the average of all elements in the array
+e) Print GCD of Sum of Numbers at Odd Places and Sum of Numbers at Even Places
+
+function sumOfNumbersInOddPlaces(arr) {
+let sum = 0;
+  for(let i=0; i<arr.length;i+=2) {
+	   sum += arr[i];
+  }
+  return sum;
+}
+
+function sumOfNumbersInEvenPlaces(arr) {
+let sum = 0;
+  for(let i=1; i<arr.length;i+=2) {
+	   sum += arr[i];
+  }
+  return sum;
+}
+
+function calculateDifference(arr) {
+  const sumOfOddPlaces = sumOfNumbersInOddPlaces(arr);
+  const sumOfEvenPlaces = sumOfNumbersInEvenPlaces(arr);
+  return sumOfOddPlaces - sumOfEvenPlaces;  
+}
+
+function countElementsInOddPlaces() {
+  return Math.ceil(arr.length/2);
+}
+
+function countElementsInEvenPlaces() {
+  return Math.floor(arr.length/2);
+}
+
+function calculateAverage() {
+  const sum = arr.reduce((total, num)=> total + num, 0);
+  return sum/arr.length;
+}
+
+function calculateGCD(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+
+  while (b !== 0) {
+    let temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+
+const input = prompt('Enter the array (comma-seperated numbers):');
+const arr = input.split(',').map(Number);
+
+console.log("Difference between Sums: ", calculateDifference(arr));
+console.log("Number of elements in Odd Places:", sumOfNumbersInOddPlaces(arr));
+console.log("Number of elements in Even Places:", sumOfNumbersInEvenPlaces(arr));
+console.log("Average of all the elements:", calculateAverage());
+console.log("GCD of Sums at Odd Places and Even Places:", calculateGCD());
+
+2. Write a JavaScript program to take 2 arrays from the user and check if the number 4 exists in any of the arrays, or both of the arrays.
+
+function checkNumberFour() {
+  const array1 = prompt('Enter the first array (comma-separated numbers):')
+    .split(',')
+    .map(Number);
+
+  const array2 = prompt('Enter the second array (comma-separated numbers):')
+    .split(',')
+    .map(Number);
+
+  const existsInArray1 = array1.includes(4);
+  const existsInArray2 = array2.includes(4);
+
+  if (existsInArray1 && existsInArray2) {
+    console.log('Number 4 exists in both arrays.');
+  } else if (existsInArray1) {
+    console.log('Number 4 exists in the first array.');
+  } else if (existsInArray2) {
+    console.log('Number 4 exists in the second array.');
+  } else {
+    console.log('Number 4 does not exist in either of the arrays.');
+  }
+}
+
+checkNumberFour();
+
+3. Write a JavaScript program to flatten the array, ie, turns a deep array into a plain array.
+
+function flattenArray(arr) {
+  let flattenedArray = [];
+
+  arr.forEach((element) => {
+    if (Array.isArray(element)) {
+      // If the element is an array, recursively flatten it
+      flattenedArray = flattenedArray.concat(flattenArray(element));
+    } else {
+      // If the element is not an array, add it to the flattened array
+      flattenedArray.push(element);
+    }
+  });
+
+  return flattenedArray;
+}
+
+//Ex:
+const deepArray = [1, [2, [3, 4], 5], 6];
+const flattenedArray = flattenArray(deepArray);
+
+console.log("The Deep Array: ", deepArray);
+console.log("The Flattened Array: ", flattenedArray);
+
+4. Write a JavaScript program to take an array as input from the user and:
+a) Store all duplicate elements in a separate array
+b) Remove the duplicate elements from the original array
+
+function processArray() {
+  const input = prompt('Enter the array (comma-separated numbers):');
+  const originalArray = input.split(',').map(Number);
+  
+  const duplicateArray = [];
+  const uniqueArray = [];
+
+  originalArray.forEach((element) => {
+    if (uniqueArray.includes(element)) {
+      // If element is already present in uniqueArray, add it to duplicateArray
+      duplicateArray.push(element);
+    } else {
+      // If element is not already present in uniqueArray, add it to uniqueArray
+      uniqueArray.push(element);
+    }
+  });
+
+  console.log('Original Array elements:', originalArray);
+  console.log('Duplicate elements:', duplicateArray);
+  console.log('Array with duplicates removed:', uniqueArray);
+}
+
+processArray();
+
+5. Debug the given JavaScript program and execute the correct code.
+function thirdLargest(arr, arr_size) {
+/* There should be at least three elements */
+if (arr_size < 3) {
+  document.write(" Invalid Input "); 
+  return;
+}
+let first = arr[0];
+for (let i = 1;i < arr_size ; i++)
+  if (arr[i] > first)
+      arr[i] = first;
+  let second = Number.MIN_VALUE; 
+  for (let i = 0;i < arr_size ; i++)
+    if (arr[i] > first && arr[i] < second)
+   	arr[i] = second;
+    let third = Number.MIN_VALUE; 
+    for (let i = 0;i < arr_size ; i++)
+	if (arr[i] < third && arr[i] > second)
+	    third = arr[i];
+	    document.write("The third Largest " + "element is ", third);
+}
+let arr = [12, 13, 1, 10, 34, 16]; 
+let n = arr.length;
+thirdLargest(arr, n);
+
+Ans:
+function thirdLargest(arr, arr_size) {
+  /* There should be at least three elements */
+  if (arr_size < 3) {
+    console.log("Invalid Input");
+    return;
+  }
+
+  let first = arr[0];
+  for (let i = 1; i < arr_size; i++) {
+    if (arr[i] > first) {
+      first = arr[i];
+    }
+  }
+
+  let second = Number.MIN_VALUE;
+  for (let i = 0; i < arr_size; i++) {
+    if (arr[i] > second && arr[i] < first) {
+      second = arr[i];
+    }
+  }
+
+  let third = Number.MIN_VALUE;
+  for (let i = 0; i < arr_size; i++) {
+    if (arr[i] < first && arr[i] < second && arr[i] > third) {
+      third = arr[i];
+    }
+  }
+
+  console.log("The third largest element is:", third);
+}
+
+let arr = [12, 13, 1, 10, 34, 16];
+let n = arr.length;
+thirdLargest(arr, n);
